@@ -6,8 +6,8 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
     const config = new DocumentBuilder()
-        .setTitle('tistory 서비스')
-        .setDescription('tistory service api 문서')
+        .setTitle('vohis dev')
+        .setDescription('vohis dev api 문서')
         .setVersion('0.1')
         .build();
 

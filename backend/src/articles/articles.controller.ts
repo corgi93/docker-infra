@@ -7,6 +7,8 @@ import {
     Param,
     Delete,
     ParseIntPipe,
+    // Error Handling
+    NotFoundException,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -40,10 +42,14 @@ export class ArticlesController {
 
     @Get(':id')
     @ApiOkResponse({ type: ArticleEntity })
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    async findOne(@Param('id', ParseIntPipe) id: number) {
         // ParseIntPipe로 NestJS파이프로 id를 자동으로 숫자로 변환할 수 있다
         // (Swagger도 string -> number로 변환되어 나타남)
-        return this.articlesService.findOne(id);
+        const article = await this.articlesService.findOne(id);
+        if (!article) {
+            throw new NotFoundException(`Article with ${id} does not exist`);
+        }
+        return article;
     }
 
     @Patch(':id')

@@ -21,7 +21,13 @@ export class ArticlesService {
     }
 
     findOne(id: number) {
-        return this.prisma.article.findUnique({ where: { id } });
+        // include로 author 객체도 반환
+        return this.prisma.article.findUnique({
+            where: { id },
+            include: {
+                author: true,
+            },
+        });
     }
 
     //TODO:  DB에 id 아티클 없으면 오류 반환. error handling 추후에

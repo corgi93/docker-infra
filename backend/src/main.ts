@@ -1,7 +1,7 @@
-import { HttpAdapterHost, NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { ValidationPipe } from '@nestjs/common';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-client-exception.filter';
 
 async function bootstrap() {
@@ -12,6 +12,11 @@ async function bootstrap() {
     // age라는 값이 들어오면 pipe에서 자동으로 제거해서 필터링 해준다.
     app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
+    // NestJS Interceptor
+    // Interceptor를 사용해 request-response에서 router핸들러 실행 전후에 추가적인 논리 실행을 추가할 수 있다.
+    app.useGlobalInterceptors(
+        new ClassSerializerInterceptor(app.get(Reflector)),
+    );
     const config = new DocumentBuilder()
         .setTitle('vohis dev')
         .setDescription('vohis dev api 문서')

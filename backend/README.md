@@ -1,6 +1,6 @@
 ## backend (NestJS)
 
-### 기술스택
+## 기술스택
 
 -   node (v18.17.1)
 -   nestjs
@@ -8,7 +8,18 @@
 -   MySQL
 -   docker
 
-### ERD
+## db 구조 폴더
+
+```
+|- src      // application 소스코드
+|- psirma   // prisma모듈은 DB에 대한 인터페이스인 Prisma Client 포함
+|-- schema.prisma // DB 스키마(테이블) 정의
+|-- migrations    // db 마이그레이션 기록 포함
+|-- seed.ts      // 개발 DB에 더미 데이터 시드하는 스크립트 포함
+|- docker-compose.yml   // PostgreSQL db에 대한 docker 이미지 정의 포함
+```
+
+## ERD
 
 -   식별관계
     -   부모테이블의 기본키를 내려받아 자식테이블의 `(기본키 + 외래키)`를 사용하는 관계
@@ -143,4 +154,12 @@ export class CreateArticleDto {
 ```
 npx nest generate filter prisma-client-exception
 
+```
+
+### schema.prisma 추가 후 sql추가
+
+Article 스키마에 User스키마 추가 후 변경 사항 migratino명령 실행
+
+```
+npx prisma migrate dev --name "add-user-model"
 ```

@@ -1,5 +1,6 @@
 -- CreateTable
-CREATE TABLE "Article" (
+CREATE TABLE "Article"
+(
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,

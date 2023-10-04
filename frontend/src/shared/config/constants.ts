@@ -13,8 +13,4 @@ export const navData: NavDataTypes[] = [
     name: "로그인",
     path: "/signin",
   },
-  {
-    name: "회원가입",
-    path: "/signup",
-  },
 ];

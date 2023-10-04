@@ -1,7 +1,8 @@
-import { Header } from "@/common/widget";
+import { Footer, Header } from "@/common/widget";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import FullHeightLayout from "@/common/components/shared/layout/full-height-layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        {children}
+
+        <FullHeightLayout>
+          <div className="flex">{children}</div>
+        </FullHeightLayout>
+        <Footer />
       </body>
     </html>
   );

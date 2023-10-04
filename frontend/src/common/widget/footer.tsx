@@ -31,7 +31,7 @@ export default function Footer() {
 
             {/* Copyright */}
             <div className="text-sm text-gray-500">
-              @nextfuse | All rights reserved
+              @unofficial-union | All rights reserved
             </div>
           </div>
         </div>
